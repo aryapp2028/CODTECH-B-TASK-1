@@ -1,0 +1,253 @@
+SQL*Plus: Release 21.0.0.0.0 - Production on Fri Jan 17 20:20:52 2025
+Version 21.3.0.0.0
+Copyright (c) 1982, 2021, Oracle.  All rights reserved.
+Enter user-name: system
+Enter password:
+Last Successful login time: Fri Jan 17 2025 20:18:38 +05:30
+Connected to:
+Oracle Database 21c Express Edition Release 21.0.0.0.0 - Production
+Version 21.3.0.0.0
+
+#CREATING TABLES
+
+(1)EMPLOYEES TABLE:
+
+SQL> create table Employees(EmployeeID int,Name varchar(100),DepartmentID int);
+
+Table created.
+
+SQL> insert into Employees values(1,'Alice',101);
+
+1 row created.
+
+SQL> insert into Employees values(2,'Rapunzel',102);
+
+1 row created.
+
+SQL> insert into Employees values(3,'Belle',NULL);
+
+1 row created.
+
+SQL> insert into Employees values(4,'Elsa',103);
+
+1 row created.
+
+SQL> insert into Employees values(5,'Ariel',104);
+
+1 row created.
+
+SQL> desc Employees;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPLOYEEID                                         NUMBER(38)
+ NAME                                               VARCHAR2(100)
+ DEPARTMENTID                                       NUMBER(38)
+
+(2)DEPARTMENT TABLE:
+
+SQL> create table Departments(DepartmentID int,DepartmentName varchar(50));
+
+Table created.
+
+SQL> insert into Departments values(101,'HR');
+
+1 row created.
+
+SQL> insert into Departments values(102,'IT');
+
+1 row created.
+
+SQL> insert into Departments values(103,'Finance');
+
+1 row created.
+
+SQL> insert into Departments values(104,'Marketing');
+
+1 row created.
+
+SQL> desc Departments;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DEPARTMENTID                                       NUMBER(38)
+ DEPARTMENTNAME                                     VARCHAR2(50)
+
+#SQL QUERIES FOR JOINS
+
+(1)INNER JOIN:
+COMBINES ROWS FROM BOTH TABLES WHERE THERE IS A MATCHING DEPARTMENTID
+
+SQL> select e.EmployeeID,e.Name,e.DepartmentID,d.DepartmentName from Employees e
+  2  inner join Departments d on e.DepartmentID = d.DepartmentID;
+
+EMPLOYEEID
+----------
+NAME
+--------------------------------------------------------------------------------
+DEPARTMENTID DEPARTMENTNAME
+------------ --------------------------------------------------
+         1
+Alice
+         101 HR
+
+         2
+Rapunzel
+         102 IT
+
+EMPLOYEEID
+----------
+NAME
+--------------------------------------------------------------------------------
+DEPARTMENTID DEPARTMENTNAME
+------------ --------------------------------------------------
+
+         4
+Elsa
+         103 Finance
+
+         5
+Ariel
+
+EMPLOYEEID
+----------
+NAME
+--------------------------------------------------------------------------------
+DEPARTMENTID DEPARTMENTNAME
+------------ --------------------------------------------------
+         104 Marketing
+
+(2)LEFT JOIN
+INCLUDES ALL ROWS FROM THE EMPLOYEES TABLE AND THE MATCHED ROWS FROM DEPARTMENTS.
+NULLS ARE RETURNED FOR NON-MATCHING ROWS.
+
+SQL> select e.EmployeeID,e.Name,e.DepartmentID,d.DepartmentName from Employees e
+  2  left join Departments d on e.DepartmentID = d.DepartmentID;
+
+EMPLOYEEID
+----------
+NAME
+--------------------------------------------------------------------------------
+DEPARTMENTID DEPARTMENTNAME
+------------ --------------------------------------------------
+         1
+Alice
+         101 HR
+
+         2
+Rapunzel
+         102 IT
+
+EMPLOYEEID
+----------
+NAME
+--------------------------------------------------------------------------------
+DEPARTMENTID DEPARTMENTNAME
+------------ --------------------------------------------------
+
+         4
+Elsa
+         103 Finance
+
+         5
+Ariel
+
+EMPLOYEEID
+----------
+NAME
+--------------------------------------------------------------------------------
+DEPARTMENTID DEPARTMENTNAME
+------------ --------------------------------------------------
+         104 Marketing
+
+         3
+Belle
+
+(3)RIGHT JOIN:
+INCLUDES ALL ROWS FROM THE DEPARTMENTS TABLE AND THE MATCHED ROWS FROM EMPLOYEES.
+NULLS ARE RETURNED FOR NON-MATCHING ROWS.
+
+SQL> select e.EmployeeID,e.Name,e.DepartmentID,d.DepartmentName from Employees e
+  2  right join Departments d on e.DepartmentID = d.DepartmentID;
+
+EMPLOYEEID
+----------
+NAME
+--------------------------------------------------------------------------------
+DEPARTMENTID DEPARTMENTNAME
+------------ --------------------------------------------------
+         1
+Alice
+         101 HR
+
+         2
+Rapunzel
+         102 IT
+
+EMPLOYEEID
+----------
+NAME
+--------------------------------------------------------------------------------
+DEPARTMENTID DEPARTMENTNAME
+------------ --------------------------------------------------
+
+         4
+Elsa
+         103 Finance
+
+         5
+Ariel
+
+EMPLOYEEID
+----------
+NAME
+--------------------------------------------------------------------------------
+DEPARTMENTID DEPARTMENTNAME
+------------ --------------------------------------------------
+         104 Marketing
+
+(4)FULL JOIN:
+INCLUDES ALL ROWS FROM BOTH TABLES.NULLS ARE
+RETURNED FOR NON-MATCHING ROWS.
+
+SQL> select e.EmployeeID,e.Name,e.DepartmentID,d.DepartmentName from Employees e
+  2  full join Departments d on e.DepartmentID = d.DepartmentID;
+
+EMPLOYEEID
+----------
+NAME
+--------------------------------------------------------------------------------
+DEPARTMENTID DEPARTMENTNAME
+------------ --------------------------------------------------
+         1
+Alice
+         101 HR
+
+         2
+Rapunzel
+         102 IT
+
+EMPLOYEEID
+----------
+NAME
+--------------------------------------------------------------------------------
+DEPARTMENTID DEPARTMENTNAME
+------------ --------------------------------------------------
+
+         3
+Belle
+
+
+         4
+Elsa
+
+EMPLOYEEID
+----------
+NAME
+--------------------------------------------------------------------------------
+DEPARTMENTID DEPARTMENTNAME
+------------ --------------------------------------------------
+         103 Finance
+
+         5
+Ariel
+         104 Marketing
+
