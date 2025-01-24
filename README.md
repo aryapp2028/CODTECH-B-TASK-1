@@ -39,3 +39,15 @@ SQL JOINs are used to retrieve data from multiple tables based on related column
 
 #Output
 
+![Image](https://github.com/user-attachments/assets/29071436-1510-4db9-9bfc-f124649067aa)
+
+![Image](https://github.com/user-attachments/assets/1d7e89da-87d5-4316-b26d-173f8f21967d)
+
+![Image](https://github.com/user-attachments/assets/7413d9cc-8094-4304-9c01-833e8393d46c)
+
+![Image](https://github.com/user-attachments/assets/756acbb0-5535-4d67-9695-6ec4e78c0a17)
+
+![Image](https://github.com/user-attachments/assets/5e33e48c-0e01-4deb-b459-ca99e87dfff7)
+
+![Image](https://github.com/user-attachments/assets/ae80a19c-6187-461e-8e97-21a2d6bada77)
+
